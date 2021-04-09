@@ -7,7 +7,14 @@ interface IOptions {
 getConnectionOptions().then((options) => {
     const newOptions = options as IOptions;
     newOptions.host = "database_ignite"; // Essa opção deverá ser EXATAMENTE o nome dado ao service do banco de dados
+    console.log("Trying to stablish a connection with database service");
     createConnection({
         ...options,
-    });
+    })
+        .then(() => {
+            console.log("conexão estabelecida");
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 });

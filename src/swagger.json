@@ -73,6 +73,69 @@
                 }
                 
             }
+        },
+        "/categories/import": {
+            "post":{
+                "tags": ["Categories"],
+                "summary": "Import new categories from a CSV File",
+                "description": "Upload a CSV file with categories and create these categories",
+                "requestBody":{
+                    "content":{
+                        "multipart/form-data":{
+                            "type": "object",
+                            "properties":{
+                                "file":{
+                                    "type":"string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    }
+                }
+            }
+        },
+        "/specifications": {
+            "post":{
+                "tags": ["Specifications"],
+                "summary":"Create a specification",
+                "description": "Create a new specification",
+                "requestBody": {
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/definitions/Specifications"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Specifications": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "name": "Specification name sample",
+                "description": "Specification description sample"
+            }
         }
     }
 }
