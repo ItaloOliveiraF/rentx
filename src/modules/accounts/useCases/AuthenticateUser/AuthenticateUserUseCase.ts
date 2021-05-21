@@ -2,7 +2,8 @@ import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
 
-import { IUsersRepository } from "../../repositories/IUsersRepository";
+import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
+import { AppError } from "@shared/errors/AppError";
 
 interface IRequest {
     email: string;
@@ -28,13 +29,13 @@ class AuthenticateUserUseCase {
         const user = await this.usersRepository.findByEmail(email);
 
         if (!user) {
-            throw new Error("Email or password incorrect!");
+            throw new AppError("Email or password incorrect!");
         }
 
         const correctPassword = await compare(password, user.password);
 
         if (!correctPassword) {
-            throw new Error("Email or password incorrect!");
+            throw new AppError("Email or password incorrect!");
         }
 
         const token = sign({}, "638964171e49c1d5ab1f31fe1e469ef4", {
