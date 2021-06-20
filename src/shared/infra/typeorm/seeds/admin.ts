@@ -7,7 +7,7 @@ async function create(): Promise<void> {
     const connection = await databaseConnection("localhost");
     const id = uuidV4();
     const password = await hash("admin", 8);
-    connection.query(`INSERT INTO USERS(id, name, email, password, "is_admin", driver_license)
+    await connection.query(`INSERT INTO USERS(id, name, email, password, "is_admin", driver_license)
     values('${id}', 'admin', 'admin@rentx.com.br', '${password}', true, 'XXXXXX')`);
 
     await connection.close();
