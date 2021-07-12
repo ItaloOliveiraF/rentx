@@ -34,42 +34,42 @@ describe("Authentication user", () => {
         expect(authenticationInfos).toHaveProperty("token");
     });
 
-    it("should not be able to authenticate a non-existent user", () => {
-        expect(async () => {
-            const user = {
-                name: "User",
-                email: "user@test.com",
-                password: "1234",
-                driver_license: "122456",
-            };
+    it("should not be able to authenticate a non-existent user", async () => {
+        const user = {
+            name: "User",
+            email: "user@test.com",
+            password: "1234",
+            driver_license: "122456",
+        };
 
-            await authenticateUserUseCase.execute({
+        await expect(
+            authenticateUserUseCase.execute({
                 email: user.email,
                 password: user.password,
-            });
-        }).rejects.toBeInstanceOf(AppError);
+            })
+        ).rejects.toEqual(new AppError("Email or password incorrect!"));
     });
 
-    it("should not be able to authenticate with incorrect password", () => {
-        expect(async () => {
-            const user = {
-                name: "User",
-                email: "user@test.com",
-                password: "1234",
-                driver_license: "122456",
-            };
+    it("should not be able to authenticate with incorrect password", async () => {
+        const user = {
+            name: "User",
+            email: "user@test.com",
+            password: "1234",
+            driver_license: "122456",
+        };
 
-            await createUserUseCase.execute({
-                name: user.name,
-                email: user.email,
-                password: user.password,
-                driver_license: user.driver_license,
-            });
+        await createUserUseCase.execute({
+            name: user.name,
+            email: user.email,
+            password: user.password,
+            driver_license: user.driver_license,
+        });
 
-            await authenticateUserUseCase.execute({
+        await expect(
+            authenticateUserUseCase.execute({
                 email: user.email,
                 password: "wrong password",
-            });
-        }).rejects.toBeInstanceOf(AppError);
+            })
+        ).rejects.toEqual(new AppError("Email or password incorrect!"));
     });
 });

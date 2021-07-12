@@ -8,12 +8,9 @@ import { AppError } from "@shared/errors/AppError";
 import "express-async-errors";
 
 import swaggerFile from "../../../swagger.json";
-import createDatabaseConnection from "../typeorm";
 import { routes } from "./routes";
 
 import "@shared/container";
-
-createDatabaseConnection();
 
 const app = express();
 

@@ -116,7 +116,7 @@ describe("List available cars", () => {
         expect(cars).toEqual([car1, car2]);
     });
     it("should be possible list available cars by brand", async () => {
-        const car1 = await createCarUseCase.execute({
+        await createCarUseCase.execute({
             name: "Car With Different Brand",
             description: "Description Car 1",
             daily_rate: 100,

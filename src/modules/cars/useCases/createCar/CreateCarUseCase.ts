@@ -2,7 +2,6 @@ import { inject, injectable } from "tsyringe";
 
 import { Car } from "@modules/cars/infra/typeorm/entities/Car";
 import { ICarsRepository } from "@modules/cars/repositories/ICarsRepository";
-import { CategoriesRepositoryInMemory } from "@modules/cars/repositories/in-memory/CategoriesRepositoryInMemory";
 import { AppError } from "@shared/errors/AppError";
 
 interface IRequest {
