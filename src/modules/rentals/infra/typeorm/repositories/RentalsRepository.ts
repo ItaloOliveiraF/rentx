@@ -36,7 +36,7 @@ class RentalsRepository implements IRentalsRepository {
         end_date,
         total,
     }: ICreateRentalDTO): Promise<Rental> {
-        const rental = await this.repository.create({
+        const rental = this.repository.create({
             car_id,
             user_id,
             expected_return_date,
