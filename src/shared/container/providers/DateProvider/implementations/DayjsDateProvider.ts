@@ -27,6 +27,12 @@ class DayjsDateProvider implements IDateProvider {
 
         return dayjs(endDateLocal).diff(startDateLocal, "days");
     }
+
+    addDays(start_date: Date, days: number): Date {
+        const startDateLocal = this.convertToLocalTime(start_date);
+
+        return dayjs(startDateLocal).add(days, "days").toDate();
+    }
 }
 
 export { DayjsDateProvider };
